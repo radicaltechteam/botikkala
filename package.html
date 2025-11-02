@@ -175,7 +175,8 @@
     margin: 20px 0;
   }
 
-  .popup li {
+
+.popup li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -232,13 +233,13 @@
     transition: all 0.3s ease;
     font-weight: bold;
     font-size: 16px;
-}
+  }
 
-.popup button.close:hover {
+  .popup button.close:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 25px rgba(255, 51, 102, 0.6);
     background: linear-gradient(145deg, #ff1a53, #ff4d88, #ff80b3);
-}
+  }
 
   /* صفحه سفارشی تمام‌صفحه */
   .popup.fullscreen {
@@ -345,7 +346,8 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  .option-btn.active {
+
+.option-btn.active {
     background: linear-gradient(145deg,
       #ff66cc 0%,
       #ff99ff 50%,
@@ -486,6 +488,100 @@
     color: #ffccff;
   }
 
+  /* استایل‌های جدید برای ریسپانسیو بودن */
+  .structure-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .structure-btn {
+    background: linear-gradient(145deg,
+      rgba(51, 0, 102, 0.9) 0%,
+      rgba(153, 51, 255, 0.9) 100%);
+    color: #fff;
+    border: 2px solid #cc99ff;
+    padding: 20px;
+
+
+border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.4s ease;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 6px 25px rgba(153, 51, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .structure-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: #ffccff;
+    box-shadow:
+      0 10px 35px rgba(153, 51, 255, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .structure-btn.active {
+    background: linear-gradient(145deg,
+      #ff66cc 0%,
+      #ff99ff 50%,
+      #cc99ff 100%);
+    color: #000;
+    font-weight: bold;
+    border-color: #ff66cc;
+    box-shadow:
+      0 0 25px rgba(255, 102, 204, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.03);
+  }
+
+  /* تنظیمات ریسپانسیو برای موبایل */
+  @media (max-width: 768px) {
+    .structure-buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .structure-btn {
+      width: 100% !important;
+      min-height: 350px;
+    }
+    
+    h1 {
+      font-size: 28px;
+    }
+    
+    .popup.fullscreen h3 {
+      font-size: 28px;
+    }
+    
+    .option-btn {
+      font-size: 14px;
+      padding: 15px 20px;
+    }
+    
+    .total {
+      font-size: 20px;
+      padding: 12px 25px;
+    }
+  }
+
+  /* تنظیمات برای دسکتاپ */
+  @media (min-width: 769px) {
+    .structure-btn {
+      width: 49%;
+    }
+  }
 </style>
 </head>
 <body>
@@ -496,118 +592,79 @@
 <div class="container">
   <h1>بسته‌های ویژه کرایه سایت رادیکال‌تِک</h1>
   <div class="buttons">
-    <!--
-    <button class="btn" onclick="openPopup('eco')">پکیچ اقتصادی</button>
-    <button class="btn" onclick="openPopup('super')">پکیچ فوق‌العاده</button>
-    <button class="btn" onclick="openPopup('simple')">پکیچ پیشنهادی</button>
-    -->
     <button class="btn" onclick="openPopup('custom')">پکیچ سفارشی</button>
   </div>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
-<!-- پاپ‌آپ‌ها -->
-<!-- بسته اقتصادی 
-<div class="popup" id="eco">
-  <button class="close" onclick="closeAll()">بستن</button>
-  <h3>پکیچ اقتصادی</h3>
-  <ul>
-    <li><span>تبلیغات پایه در اینستاگرام</span> <span class="price"><del>100,000</del> 70,000</span></li>
-    <li><span>یک بنر طراحی رایگان</span> <span class="price">رایگان</span></li>
-    <li><span>پشتیبانی محدود ۷ روزه</span> <span class="price"><del>50,000</del> 40,000</span></li>
-  </ul>
-  <div class="totals">
-    مجموع قبل تخفیف: <span>150,000</span> تومان<br>
-    مجموع بعد تخفیف: <span>110,000</span> تومان
-  </div>
-</div>
--->
-<!--بسته فوق‌العاده 
-<div class="popup" id="super">
-  <button class="close" onclick="closeAll()">بستن</button>
-  <h3>پکیچ فوق‌العاده</h3>
-  <ul>
-    <li><span>تبلیغات حرفه‌ای چند پلتفرمی</span> <span class="price"><del>300,000</del> 250,000</span></li>
-    <li><span>سه طرح گرافیکی رایگان</span> <span class="price">رایگان</span></li>
-    <li><span>پشتیبانی یک‌ماهه VIP</span> <span class="price"><del>120,000</del> 90,000</span></li>
-  </ul>
-  <div class="totals">
-    مجموع قبل تخفیف: <span>420,000</span> تومان<br>
-    مجموع بعد تخفیف: <span>340,000</span> تومان
-  </div>
-</div>
--->
-<!-- بسته ساده 
-<div class="popup" id="simple">
-  <button class="close" onclick="closeAll()">بستن</button>
-  <h3>پکیچ پیشنهادی</h3>
-  <ul>
-    <li><span>یک پست تبلیغاتی</span> <span class="price"><del>60,000</del> 50,000</span></li>
-    <li><span>پشتیبانی یک‌روزه</span> <span class="price">20,000</span></li>
-  </ul>
-  <div class="totals">
-    مجموع قبل تخفیف: <span>80,000</span> تومان<br>
-    مجموع بعد تخفیف: <span>70,000</span> تومان
-  </div>
-</div>
--->
 <!-- بسته سفارشی تمام‌صفحه -->
 <div class="popup fullscreen" id="custom">
   <button class="close full" onclick="closeAll()">بستن ✖</button>
   <div class="fullscreen-content">
     <h3>پکیچ سفارشی رادیکال‌تِک</h3>
-   
-   <div class="extra-content">
-    <div class="info-box" style="font-size: large;">⭐ <p><strong>کرایه ماهیانه سایت بوتیکالا :</strong></p>
+    
+    <div class="info-box" style="margin-bottom: 15px;">⭐ ابتدا بین دو ساختار زیر یکی را بر اساس پروژه ی خود انتخاب کنید :</div>
+    
+    <!-- بخش ساختارها با کلاس جدید -->
+    <div class="structure-buttons">
+      <button class="structure-btn" data-price="3000000">
+        <div>
+          ساختار شماره 1⭐ <p><strong>کرایه ماهیانه سایت :</strong></p>
+          <p>شامل 40 عدد محصول (با امکان ثبت تنوع رنگ و سایز)</p>
+          <p>حداکثر 50 مشتری در ماه</p>
+          <p>حداکثر 30 سفارش در ماه</p>
+          <p><strong>هزینه‌ی پایه:</strong> از 3 میلیون تومان ماهانه</p>
+          <p><strong>پورسانت فروش:</strong> از %5 به ازای هر محصول</p>
+          <div class="info-box" style="margin: 15px;">
+            🎯 <p><strong>هزینه‌های اضافه:</strong></p>
+            <p>به‌ازای هر محصول اضافه: 10 هزار تومان</p>
+            <p>به‌ازای هر مشتری اضافه در ماه: 10 هزار تومان</p>
+            <p>به‌ازای هر سفارش اضافه در ماه: 10 هزار تومان</p>
+          </div>
+        </div>
+      </button>
 
-<p>شامل 50 عدد محصول (با امکان ثبت تنوع رنگ و سایز)</p>
+      <button class="structure-btn" data-price="0">
+        <div>
+          ساختار شماره 2⭐ <p><strong>کرایه ماهیانه سایت :</strong></p>
+          <p>شامل 30 عدد محصول (با امکان ثبت تنوع رنگ و سایز)</p>
+          <p>حداقل 40 مشتری در ماه</p>
+          <p>حداقل 15 سفارش در ماه</p>
+          <p><strong>هزینه‌ی پایه:</strong> رایگان</p>
+          <p><strong>پورسانت فروش:</strong> از %15 به ازای هر محصول</p>
+          <div class="info-box" style="margin: 15px;">
+            🎯 <p><strong>هزینه‌های اضافه:</strong></p>
+            <p>به‌ازای هر محصول اضافه: 10 هزار تومان</p>
+            <p>به‌ازای هر مشتری اضافه در ماه: 10 هزار تومان</p>
+            <p>به‌ازای هر سفارش اضافه در ماه: 10 هزار تومان</p>
+          </div>
 
-<p>حداکثر 50 مشتری در ماه</p>
-
-<p>حداکثر 30 سفارش در ماه</p>
-
-<p><strong>هزینه‌ی پایه:</strong> از 3 میلیون تومان ماهانه</p>
-
-<p><strong>پورسانت فروش:</strong> از %1 به ازای هر محصول</p>
-
-
-      <div class="info-box" style="margin: 15px;">🎯 <p><strong>هزینه‌های اضافه:</strong></p>
-
-<p>به‌ازای هر محصول اضافه: 10 هزار تومان</p>
-
-<p>به‌ازای هر 10 مشتری اضافه در ماه: 10 هزار تومان</p>
-
-<p>به‌ازای هر 5 سفارش اضافه در ماه: 10 هزار تومان</p></div></div>
+</div>
+      </button>
+    </div>
+    
+    <div class="extra-content">
       <div class="info-box">💡 علاوه بر سرویس پایه بالا، این امکان وجود دارد که جهت تقویت پکیج و افزایش بازدهی و میزان فروش، چندین سرویس تکمیلی از فهرست زیر انتخاب و به پکیج افزوده شود.</div>
       <div class="info-box">⭐ سرویس‌های انتخاب شده با رنگ صورتی مشخص می‌شوند</div>
       <div class="info-box">🎯 قیمت نهایی در پایین صفحه همیشه قابل مشاهده است</div>
     </div>
-   
+    
     <div class="options">
-      <button class="option-btn" data-price="2000000">
-
-ارائه خدمات ادمین سایت به‌ صورت تمام‌ وقت شامل: <br>
-
-افزودن و ویرایش اطلاعات و محصولات،
-
-بارگذاری و به‌روزرسانی تصاویر و اطلاعات محصولات ،
-
-مدیریت موجودی و انبار داری ,
-
-کنترل نظم و کیفیت محتوای سایت : <br>
-
-
-  شروع قیمت از 2 میلیون تومان می‌باشد.</button>
+      <button class="option-btn" data-price="3000000">
+        ارائه خدمات ادمین سایت به‌ صورت تمام‌ وقت شامل: <br>
+        افزودن و ویرایش اطلاعات و محصولات،
+        بارگذاری و به‌روزرسانی تصاویر و اطلاعات محصولات ،
+        مدیریت موجودی و انبار داری ,
+        کنترل نظم و کیفیت محتوای سایت : <br>
+        شروع قیمت از 3 میلیون تومان می‌باشد.
+      </button>
       <button class="option-btn" data-price="250000">اسلایدر : هر اسلاید 250 هزار تومان ماهیانه</button>
       <button class="option-btn" data-price="200000">بنر ثابت صفحه ی اول : 200 هزار تومان ماهیانه</button>
-      <button class="option-btn" data-price="100000">افزودن محصول به بنر پرفروش ترین ها ( در صورت بالا بودن میزان فروش محصول ) : 100 هزار تومان ماهیانه
-</button>
+      <button class="option-btn" data-price="100000">افزودن محصول به بنر پرفروش ترین ها ( در صورت بالا بودن میزان فروش محصول ) : 100 هزار تومان ماهیانه</button>
       <button class="option-btn" data-price="0">فتوشاپ و فیلم سازی (طراحی تصاویر محصولات و تولید محتوا : فیلم و پوستر و بنر ) : غیرفعال</button>
-      </div>
-   
-  
-   
+    </div>
+    
     <div class="total-container">
       <div class="total">مبلغ کل: <span id="totalPrice"></span> تومان</div>
     </div>
@@ -619,24 +676,24 @@
 function createStars() {
   const starsContainer = document.getElementById('stars');
   const starCount = 150;
- 
+
   for (let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
     star.className = 'star';
-   
+
     const left = Math.random() * 100;
     const top = Math.random() * 100;
     const size = Math.random() * 3 + 1;
     const delay = Math.random() * 3;
     const duration = Math.random() * 2 + 2;
-   
+
     star.style.left = left + 'vw';
     star.style.top = top + 'vh';
     star.style.width = size + 'px';
     star.style.height = size + 'px';
     star.style.animationDelay = delay + 's';
     star.style.animationDuration = duration + 's';
-   
+
     starsContainer.appendChild(star);
   }
 }
@@ -652,7 +709,7 @@ function openPopup(id) {
   const popup = document.getElementById(id);
   popup.style.display = 'block';
   overlay.style.display = id === 'custom' ? 'none' : 'block';
- 
+
   // اگر صفحه سفارشی است، event listener ها را تنظیم کن
   if (id === 'custom') {
     setTimeout(initializeCustomPage, 100);
@@ -667,43 +724,70 @@ function closeAll() {
 }
 
 function initializeCustomPage() {
+  const structureButtons = document.querySelectorAll('#custom .structure-btn');
   const optionButtons = document.querySelectorAll('#custom .option-btn');
- 
-  optionButtons.forEach(btn => {
-    // حذف event listener های قبلی
+
+  // حذف event listener های قبلی
+  structureButtons.forEach(btn => {
     btn.replaceWith(btn.cloneNode(true));
   });
- 
-  // event listener های جدید
-  const newOptionButtons = document.querySelectorAll('#custom .option-btn');
- 
-  newOptionButtons.forEach(btn => {
+  
+  optionButtons.forEach(btn => {
+    btn.replaceWith(btn.cloneNode(true));
+  });
+
+  // event listener های جدید برای دکمه‌های ساختار
+  const newStructureButtons = document.querySelectorAll('#custom .structure-btn');
+  newStructureButtons.forEach(btn => {
     btn.addEventListener('click', function() {
-      const price = parseInt(this.getAttribute('data-price'));
-     
-      if (this.classList.contains('active')) {
-        this.classList.remove('active');
-        total -= price;
-      } else {
-        this.classList.add('active');
-        total += price;
-      }
-     
-      updateTotalDisplay();
+      // فقط یک دکمه ساختار می‌تواند فعال باشد
+      newStructureButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // محاسبه مجدد قیمت کل
+      recalculateTotal();
     });
   });
- 
-  // ریست کردن وضعیت
-  total = 3000000;
+
+  // event listener های جدید برای دکمه‌های گزینه‌ها
+  const newOptionButtons = document.querySelectorAll('#custom .option-btn');
+  newOptionButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      recalculateTotal();
+    });
+  });
+
+
+// ریست کردن وضعیت
+  total = 0;
   updateTotalDisplay();
+  newStructureButtons.forEach(btn => btn.classList.remove('active'));
   newOptionButtons.forEach(btn => btn.classList.remove('active'));
+}
+
+function recalculateTotal() {
+  total = 0;
+  
+  // جمع قیمت دکمه‌های ساختار فعال
+  const activeStructureBtn = document.querySelector('#custom .structure-btn.active');
+  if (activeStructureBtn) {
+    total += parseInt(activeStructureBtn.getAttribute('data-price'));
+  }
+  
+  // جمع قیمت دکمه‌های گزینه‌های فعال
+  const activeOptionBtns = document.querySelectorAll('#custom .option-btn.active');
+  activeOptionBtns.forEach(btn => {
+    total += parseInt(btn.getAttribute('data-price'));
+  });
+  
+  updateTotalDisplay();
 }
 
 function updateTotalDisplay() {
   const totalElement = document.getElementById('totalPrice');
   if (totalElement) {
     totalElement.textContent = total.toLocaleString('fa-IR');
-    console.log('مجموع قیمت:', total);
   }
 }
 
@@ -721,9 +805,6 @@ if (customContent) {
     }
   });
 }
-
-// تست: اضافه کردن لاگ برای دیباگ
-console.log('اسکرول فعال شد. محتوای قابل اسکرول:', customContent);
 
 // اضافه کردن event listener برای دکمه‌های اصلی
 document.querySelectorAll('.btn').forEach(btn => {
